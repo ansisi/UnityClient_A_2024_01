@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExGameManager : MonoBehaviour
 {
-    public ExGameData gameData;   
+    public ExGameData gameData;
     void Start()
     {
         Debug.Log("Game Name : " + gameData.gameName);

@@ -641,7 +641,7 @@ MonoBehaviour:
   storyModels:
   - {fileID: 11400000, guid: f67513217cf9a674397ba588d7db2f37, type: 2}
   - {fileID: 11400000, guid: f67513217cf9a674397ba588d7db2f37, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5307406b1f093db43bbe6f6b6213a5b9, type: 2}
   - {fileID: 11400000, guid: 07317635b8682ba448c836b862973bed, type: 2}
   - {fileID: 0}
 --- !u!4 &1314821466
