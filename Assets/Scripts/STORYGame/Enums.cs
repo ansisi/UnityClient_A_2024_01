@@ -57,7 +57,7 @@ namespace STORYGAME
         public int consitiution;
         public int intelligence;
         public int wisdom;
-        public int sharisma;
+        public int charisma;
     }
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using STORYGAME;
+using static STORYGAME.StoryTableObject;
 
 [CreateAssetMenu(fileName = "NewSory", menuName = "ScriptableObjects/StoryModel")]
 public class StoryModel : ScriptableObject
@@ -69,7 +70,7 @@ public class StoryModel : ScriptableObject
     
 
     public ResultType resultType;
-    public int valuel;  
+    public int value;  
     public Stats stats;
  
  }
