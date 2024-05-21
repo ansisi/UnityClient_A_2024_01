@@ -13,6 +13,7 @@ public class StorySystem : MonoBehaviour
     {
         DOING,
         SELECT,
+        NONE,
         DONE
     }
 
@@ -26,6 +27,8 @@ public class StorySystem : MonoBehaviour
 
     public Button[] buttonWay = new Button[3];
     public Text[] buttonWayText = new Text[3];
+
+    public TEXTSYSTEM currentTextShow = TEXTSYSTEM.NONE;
     private void Awake()
     {
         instance = this;
@@ -42,6 +45,8 @@ public class StorySystem : MonoBehaviour
         }
         fullText = currentStoryModel.storyText;
         StartCoroutine(ShowText());
+
+        CoShowText();
     }
 
     public void StoryModelint()
@@ -58,14 +63,43 @@ public class StorySystem : MonoBehaviour
     public void OnWayClick(int index)
     {
 
+        if (currentTextShow == TEXTSYSTEM.DOING)
+            return;
+        bool CheckEventTypeNone = false;
+        StoryModel playStoryModel = currentStoryModel;
+
+        if(playStoryModel.options[index].enventCheck.eventType == StoryModel.EventCheck.EventType.NONE)
+        {
+            for(int i =0; i < playStoryModel.options[index].enventCheck.suceessReult.Length; i++)
+            {
+                GameSystem.instance.ApplyChoice(currentStoryModel.options[index].enventCheck.suceessReult[i]);
+                    CheckEventTypeNone = true;
+            }
+        }
+    }
+    public void CoShowText()
+    {
+        StoryModelint();
+        ResetShow();
+        StartCoroutine(ShowText());
+    }
+    public void ResetShow()
+    {
+        textComponent.text = "";
+        for(int i =0; i< buttonWay.Length; i++)
+        {
+            buttonWay[i].gameObject.SetActive(false);
+        }
     }
     IEnumerator ShowText()
     {
+        currentTextShow = TEXTSYSTEM.DOING;
 
-        if(currentStoryModel.MainImage!=null)
+        if(currentStoryModel.MainImage  !=null)
         {
+
             Rect rect = new Rect(0, 0, currentStoryModel.MainImage.width, currentStoryModel.MainImage.height);
-            Vector2 pivot = new Vector2(0.5f, 0.5f);
+            Vector2 pivot = new Vector2(0.5f, 0.5f);    //스프라이트의 축(중심) 지정
             Sprite sprite = Sprite.Create(currentStoryModel.MainImage, rect, pivot);
 
             imageComponent.sprite = sprite; ;
@@ -89,6 +123,8 @@ public class StorySystem : MonoBehaviour
 
 
         yield return new WaitForSeconds(delay);
+
+        currentTextShow = TEXTSYSTEM.NONE;
     }
 
 }
